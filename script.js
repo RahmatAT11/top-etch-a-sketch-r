@@ -1,7 +1,9 @@
 const sketchContainer = document.querySelector(".sketch-container");
 const createGridBtn = document.getElementById("create-grid-button");
+const penMode = document.getElementById("pen-mode-button");
 const maxValue = 100;
 let isNotMaxValue = true;
+let isPenMode = false;
 // grid.style.width = "200px";
 // grid.style.height = "200px";
 
@@ -9,12 +11,8 @@ const createGrid = (gridSize) => {
     for (let i = 0; i < Math.pow(gridSize, 2); i++) {
         const grid = document.createElement("div");
 
-        grid.className = `grid`;
+        grid.classList.add(`grid`);
         grid.id = `grid${i}`;
-
-        grid.onmouseenter = () => {
-            grid.style.backgroundColor = "white";
-        }
 
         sketchContainer.appendChild(grid);
     }
@@ -28,7 +26,6 @@ const destroyGrid = () => {
         const iterate = sketchContainer.children.length;
         for (let i = 0; i < iterate; i++) {
             const child = sketchContainer.firstChild;
-            console.log(i)
             sketchContainer.removeChild(child);
         }
     }
@@ -46,4 +43,25 @@ const appsSetup = () => {
     } while (isNotMaxValue);
 }
 
+const activatePenMode = () => {
+    isPenMode = !isPenMode;
+
+    if (isPenMode) {
+        penMode.classList.add("pen-mode-btn-active")
+        for (let i = 0; i < sketchContainer.children.length; i++) {
+            const grid = sketchContainer.children[i];
+            grid.onmousemove = () => {
+                grid.style.backgroundColor = "black";
+            }
+        }
+    } else {
+        penMode.classList.remove("pen-mode-btn-active")
+        for (let i = 0; i < sketchContainer.children.length; i++) {
+            const grid = sketchContainer.children[i];
+            grid.onmousemove = () => {}
+        }
+    }
+}
+
+penMode.onclick = () => activatePenMode();
 createGridBtn.onclick = () => appsSetup();

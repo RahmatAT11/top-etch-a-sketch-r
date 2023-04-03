@@ -2,17 +2,22 @@
     display: grid;
     /* grid-template-columns: repeat(16, 50px);
     grid-template-rows: repeat(16, 50px); */
-    gap: 1px;
+    border: 2px solid black;
 }
 
 .grid {
-    background-color: black;
+    background-color: white;
 }
 
-.create-grid-btn {
+.create-grid-btn, .pen-mode-btn {
     background-color: ghostwhite;
     color: gray;
     font-size: medium;
     padding: 5px 2px;
     margin-bottom: 20px;
+}
+
+.pen-mode-btn-active, .pen-mode-btn:hover {
+    background-color: lightslategray;
+    color: white;
 }
