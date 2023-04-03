@@ -1,4 +1,5 @@
 const sketchContainer = document.querySelector(".sketch-container");
+const createGridBtn = document.getElementById("create-grid-button");
 const maxValue = 100;
 let isNotMaxValue = true;
 // grid.style.width = "200px";
@@ -13,15 +14,21 @@ const createGrid = (gridSize) => {
         sketchContainer.appendChild(grid);
     }
 
-    sketchContainer.style.gridTemplateColumns = `repeat(${gridSize}, 50px)`;
-    sketchContainer.style.gridTemplateRows = `repeat(${gridSize}, 50px)`
+    sketchContainer.style.gridTemplateColumns = `repeat(${gridSize}, 10px)`;
+    sketchContainer.style.gridTemplateRows = `repeat(${gridSize}, 10px)`
 }
 
-do {
-    const gridSize = parseInt(window.prompt("Please enter the grid size"));
+const appsSetup = () => {
+    do {
+        const gridSize = parseInt(window.prompt("Please enter the grid size"));
+    
+        if (gridSize <= maxValue) {
+            createGrid(gridSize);
+            isNotMaxValue = false;
+        }
+    } while (isNotMaxValue);
+}
 
-    if (gridSize <= maxValue) {
-        createGrid(gridSize);
-        isNotMaxValue = false;
-    }
-} while (isNotMaxValue);
+createGridBtn.onclick = () => appsSetup();
+
+console.log(createGridBtn)
